@@ -43,3 +43,27 @@ sudo pip install flask-babel
 sudo pip install guess_language
 sudo pip install flipflop
 sudo pip install coverage
+
+TEST SITE:
+https://fanwatch-prototype-higg0.c9.io/
+
+RUN:
+    python run.py $IP:$PORT
+    Make sure you are in the right dir (use dir, cd, cd .)
+
+PYTHON VERSION:
+    python -c "import sys; print(sys.version)"
+    
+SQLLITE3:
+    open console: sqlite3 db.fanwatch
+    quit console: .quit
+    https://www.sqlite.org/cli.html
+    http://www.sitepoint.com/getting-started-sqlite3-basic-commands/
+
+DB DETAILS:
+    Link: https://www.dropbox.com/s/n7mh7vs28x7v3hn/DB%20schemas.jpg?dl=0
+    User Data [user_id, username, first_name, last_name]
+    Event Data [event_id, user_id, venue_id, event_score]
+        note, each row will have different events and users for each event
+    Venue List [venue_id, venue_name, address, lat, lng, type, event_id]
+        https://developers.google.com/maps/articles/phpsqlajax_v3
