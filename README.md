@@ -3,6 +3,7 @@
 Web app that helps sports fans find watch events with fellow fans.
 
 
+## Notes
 Built in the Cloud9 IDE, with help from these great tutorials
 http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 http://flask.pocoo.org/docs/0.10/quickstart/
