@@ -1,0 +1,20 @@
+#!/bin/bash
+# Flask Installation
+# -->chmod 700 framework_install
+# -->./framework_install
+
+
+sudo easy_install Flask
+
+sudo pip install flask
+sudo pip install flask-login
+sudo pip install flask-openid
+sudo pip install flask-mail
+sudo pip install flask-sqlalchemy
+sudo pip install sqlalchemy-migrate
+sudo pip install flask-whooshalchemy
+sudo pip install flask-wtf
+sudo pip install flask-babel
+sudo pip install guess_language
+sudo pip install flipflop
+sudo pip install coverage
