@@ -1,16 +1,15 @@
 <!--This template is a sample layout for initial build-out and testing-->
 
-<html>
-  <head>
-    <title>{{ section }} | FanWatch</title>
-  </head>
-  <body>
-    <h2>{{ section }}</h2>
-    <h4>Details: {{ desc }}</h4>
-    <h4>Links:
-        {% for entry in links %}
-        <li><a href="/{{ entry[0] }}">{{ entry[1] }}</a></li>
-        {% endfor %}    
+{% extends "sample_base.html" %}
+{% block content %}
+    <h4>
+      Description:
+      {{ desc }}
     </h4>
-  </body>
-</html>
+    <h4>
+      Links:
+      {% for entry in links %}
+      <li><a href="/{{ entry[0] }}">{{ entry[1] }}</a></li>
+      {% endfor %} 
+    </h4>
+{% endblock %}
