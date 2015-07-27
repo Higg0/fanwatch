@@ -1,7 +1,10 @@
 #!/bin/bash
 # Flask Installation
+
+# Copy file to directory you want, then CD there
 # -->chmod 700 framework_install
 # -->./framework_install
+# Remove installation file
 
 
 sudo easy_install Flask
