@@ -12,7 +12,14 @@ from app import app
 @app.route('/splash')
 def splash():
     section='FanWatch'
-    desc='Homepage the users first reach.'
+    desc='''Traveling for work and want to watch UVa basketball with fellow Wahoos? 
+            Trying to get all of the Aresenal fans to settle on one spot to watch Premier League matches? 
+            Do you enjoy being that one annoying Cowboys guy at the bar?
+            
+            FanWatch is the easiest way to find a place to watch games with fellow fans. 
+            Search for viewing parties by your favorite sports and teams. Match up against opposing team fans and prove which fan base is stronger.
+            Register below to find your first event, or login if you are returning. Enjoy and welcome to FanWatch!
+        '''
     links=[['register','Register'],
            ['login','Login']]
     return render_template('sample_splash.html', section=section, desc=desc, links=links)

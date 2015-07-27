@@ -1,7 +1,7 @@
 #!/bin/bash
 # Flask Installation
 
-# Copy file to directory you want, then CD there
+# Copy file to directory you want (workspace), then CD there
 # -->chmod 700 framework_install
 # -->./framework_install
 # Remove installation file
