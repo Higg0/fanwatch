@@ -3,37 +3,60 @@ Contains all of the site views. Basically a ToC.
 This will be a lot of the meat of the app.
 '''
 
-from flask import render_template
-from app import app
+from flask import Flask, render_template, flash, redirect, session, url_for, request, g, current_app
+from flask.ext.login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
+from oauth import GoogleSignIn
+
+from app import app, db, lm
+from .models import User
 
 
-# Splash Screen
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+# Home Page
 @app.route('/')
-@app.route('/splash')
-def splash():
-    section='FanWatch'
-    desc='''Traveling for work and want to watch UVa basketball with fellow Wahoos? 
-            Trying to get all of the Aresenal fans to settle on one spot to watch Premier League matches? 
-            Do you enjoy being that one annoying Cowboys guy at the bar?
-            
-            FanWatch is the easiest way to find a place to watch games with fellow fans. 
-            Search for viewing parties by your favorite sports and teams. Match up against opposing team fans and prove which fan base is stronger.
-            Register below to find your first event, or login if you are returning. Enjoy and welcome to FanWatch!
-        '''
-    links=[['register','Register'],
-           ['login','Login']]
-    return render_template('sample_splash.html', section=section, desc=desc, links=links)
-
-# Register
-@app.route('/register')
-def signup():
-    section='Register'
-    desc='Page to sign up for a new account.'
-    links=[['','Back'],
-           ['home','Register']]
-    return render_template('sample_splash.html', section=section, desc=desc, links=links)
+@app.route('/index')
+def index():
+    return render_template('index.html')
     
-# Login
+# Login with Google
+@app.route('/authorize/google/')
+def oauth_authorize():
+    if not current_user.is_anonymous():
+        return redirect(url_for('me'))
+    oauth = GoogleSignIn()
+    return oauth.authorize()
+
+# Login with Google - callback
+@app.route('/oauth2callback')
+def oauth_callback():
+    if not current_user.is_anonymous():
+        return redirect(url_for('me'))
+    print 'DEBUG_1'
+    social_id, username, email = GoogleSignIn().callback()
+    print 'DEBUG_2'
+    if social_id is None:
+        flash('Authentication failed.')
+        return redirect(url_for('index'))
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        user = User(name=username, email=email)
+        db.session.add(user)
+        db.session.commit()
+    login_user(user, remember=True)
+    return redirect(url_for('me'))
+
+# Logged in homepage
+@app.route('/me')
+def me():
+    return render_template('me_login.html')
+
+
+
+
+'''
 @app.route('/login')
 def signin():
     section='Login'
@@ -80,7 +103,7 @@ def games():
            ['events','Select Event']]
     return render_template('sample.html', section=section, desc=desc, links=links)
     
-# View Events by Game
+# Create a new event
 @app.route('/new_event')
 def new_event():
     section='Create New Event'
@@ -96,4 +119,5 @@ def venues():
     links=[['home','Home'],
            ['events','See Event Details']]
     return render_template('sample.html', section=section, desc=desc, links=links)
-    
+
+'''    

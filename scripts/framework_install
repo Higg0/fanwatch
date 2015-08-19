@@ -21,3 +21,9 @@ sudo pip install flask-babel
 sudo pip install guess_language
 sudo pip install flipflop
 sudo pip install coverage
+sudo pip install rauth
+sudo pip install Flask-OAuth
+sudo pip install oauth
+sudo pip install oauth2
+sudo pip install requests
+sudo pip install yolk

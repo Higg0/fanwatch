@@ -2,16 +2,16 @@
 
 from app import db
 
-class Users(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True) 
+    name = db.Column(db.String(64), index=True, unique=False)
+    email = db.Column(db.String(120), index=True, unique=True)
     created_events = db.relationship('Events', backref='creator', lazy='dynamic') #user.created_events should allow us to find events they have created
 
     # describes how to display objects in model
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
-        
+        return '<User %r>' % (self.name)
+
 class Events(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     event_name = db.Column(db.String(120), index=True, unique=False) #combines team and venue, format - 'League_HomeTeam_AwayTeam_VenueName'

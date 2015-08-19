@@ -10,3 +10,21 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'bQ2wd9k2sTy907wk7u39R5oJzk1sbF7U'
+
+OAUTH_CREDENTIALS = {
+    'google': {
+        'id': '159170913595-72jo5t2t9igm52ffk70e8ii321khnpi0',
+        'secret': 'qd4LwMJ_GB1_gjkEfrG4MP0b',
+        'redirect': 'https://fanwatch-higg0.c9.io/oauth2callback'
+    },
+    'facebook': {
+        'id': 'n/a',
+        'secret': 'n/a',
+        'redirect': 'n/a'
+    },
+     'twitter': {
+        'id': 'n/a',
+        'secret': 'n/a',
+        'redirect': 'n/a'
+    }
+}
