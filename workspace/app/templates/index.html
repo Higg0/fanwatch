@@ -7,20 +7,38 @@
   </head>
   <body>
     <h1>FanWatch</h1>
-    <p>
+    {% if current_user.is_authenticated() %}
+      <h5>Signed in as {{ current_user.email }}</h5>
+      <h2>Hi, {{ current_user.name }}!</h2>
+      <p>
+        <h3> 
+        Upcoming Events
+        </h3>
+        <h4>
+          There will eventually be a list of attending events here...
+        </h4>
+      </p>
+      <p><a href='/sports'>Find an Event</a></p>
+      <p><a href='/new_event'>Create an Event</a></p>
+      <p><a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
       <h3> 
-      Traveling for work and want to watch UVa basketball with fellow Wahoos? <br>
-      Trying to get all of the Aresenal fans to settle on one spot to watch Premier League matches? <br>
-      Do you enjoy being that one annoying Cowboys guy at the bar? <br>
-      <br>
-      FanWatch is the easiest way to find a place to watch games with fellow fans. 
-      Search for viewing parties by your favorite sports and teams. Match up against opposing team fans and prove which fan base is stronger.
-      Register below to find your first event, or login if you are returning. Enjoy and welcome to FanWatch!
-      <br>
-      <br>
-      FanWatch requires a Google account (more options coming soon!)
+        Traveling for work and want to watch UVa basketball with fellow Wahoos? <br>
+        Trying to get all of the Aresenal fans to settle on one spot to watch Premier League matches? <br>
+        Do you enjoy being that one annoying Cowboys guy at the bar? <br>
+        <br>
+        FanWatch is the easiest way to find a place to watch games with fellow fans. 
+        Search for viewing parties by your favorite sports and teams. Match up against opposing team fans and prove which fan base is stronger.
+        Register below to find your first event, or login if you are returning. Enjoy and welcome to FanWatch!
+        <br>
       </h3>
-    </p>
-    <p><a href='/authorize/google'>Get Started</a></p>
+      <h2>Login to get started!</h2>
+      <p><a href="{{ url_for('oauth_authorize', provider='google') }}">Google</a></p>
+      <!-- <p><a href="{{ url_for('oauth_authorize', provider='facebook') }}">Login with Facebook</a></p> -->
+      <p>Facebook - Coming Soon!</p>
+      <p>Twitter - Probably Not!</p>
+      <!--  <p><a href="{{ url_for('oauth_authorize', provider='twitter') }}">Login with Twitter</a></p>  -->
+    {% endif %}
+
   </body>
 </html>
