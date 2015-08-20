@@ -1,0 +1,13 @@
+<!--This template is a sample layout for initial build-out and testing-->
+
+{% extends "base.html" %}
+{% block content %}
+    <h4>
+      {{ prompt }}
+    </h4>
+    <h4>
+      {% for entry in listing %}
+      <li><a href="{{ url_for('create_pick_game', sport = entry ) }}">{{ entry }}</a></li>
+      {% endfor %} 
+    </h4>
+{% endblock %}

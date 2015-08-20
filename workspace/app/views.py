@@ -1,19 +1,19 @@
 '''
-Contains all of the site views. Basically a ToC.
-This will be a lot of the meat of the app.
+Contains all of the site views (basically a ToC)
 '''
 
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g, current_app
 from flask.ext.login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from oauth import OAuthSignIn
+from content import get_sports, get_games
 
 from app import app, db, lm
-from .models import User
-
+from .models import User, Events, Attendees
 
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 # Home Page
 @app.route('/')
@@ -53,41 +53,47 @@ def oauth_callback(provider):
     login_user(user, True)
     return redirect(url_for('index'))
 
+# Create a new event - list of sports
+@app.route('/new_event/sports')
+@login_required
+def create_pick_sport():
+    section='Pick a sport'
+    back=url_for('index')
+    prompt='Pick a sport'
+    listing=get_sports()
+    return render_template('create_event_sports.html', section=section, back=back, listing=listing, prompt=prompt)
 
-#@login_required
+@app.route('/new_event/sports/<sport>')
+@login_required
+def create_pick_game(sport):
+    section='Pick a match'
+    back=url_for('create_pick_sport')
+    prompt='Pick a match'
+    listing=get_games()
+    return render_template('create_event_games.html', section=section, back=back, listing=listing, prompt=prompt)
+
+@app.route('/new_event/create')
+@login_required
+def create_event():
+    section='Create Event'
+    back=url_for('create_pick_sport')
+    prompt='Pick a place'
+    return render_template('create_event_games.html', section=section, back=back, prompt=prompt)
+
+
+
+# Lists events nearby in map
+@app.route('/events')
+@login_required
+def events():
+    section='Events'
+    desc='Screen to create a new event.'
+    links=[['events','See Event Details']]
+    return render_template('sample.html', section=section, desc=desc, links=links)
 
 
 '''
-# Logged in homepage
-@app.route('/me')
-def me():
-    return render_template('me_login.html')
 
-
-
-
-
-@app.route('/login')
-def signin():
-    section='Login'
-    desc='Page to sign in to your account.'
-    links=[['','Back'],
-           ['home','Login']]
-    return render_template('sample_splash.html', section=section, desc=desc, links=links)
-    
-    
-
-    
-# Homepage
-@app.route('/home')
-def home():
-    section='Home'
-    desc='Homepage for logged in users.'
-    links=[['events','Event'],
-           ['sports','Pick a Sport'],
-           ['venues','Pick a Venue']]
-    return render_template('sample.html', section=section, desc=desc, links=links)
-    
 # Event Details
 @app.route('/events')
 def events():
@@ -112,14 +118,7 @@ def games():
     links=[['new_event','Create New Event'],
            ['events','Select Event']]
     return render_template('sample.html', section=section, desc=desc, links=links)
-    
-# Create a new event
-@app.route('/new_event')
-def new_event():
-    section='Create New Event'
-    desc='Screen to create a new event.'
-    links=[['events','See Event Details']]
-    return render_template('sample.html', section=section, desc=desc, links=links)
+
     
 # View Venues by Location
 @app.route('/venues')
