@@ -5,7 +5,7 @@ This will be a lot of the meat of the app.
 
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g, current_app
 from flask.ext.login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-from oauth import GoogleSignIn
+from oauth import OAuthSignIn
 
 from app import app, db, lm
 from .models import User
@@ -21,33 +21,43 @@ def load_user(id):
 def index():
     return render_template('index.html')
     
-# Login with Google
-@app.route('/authorize/google/')
-def oauth_authorize():
+# Logout
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+    
+# Authorize
+@app.route('/authorize/<provider>')
+def oauth_authorize(provider):
     if not current_user.is_anonymous():
-        return redirect(url_for('me'))
-    oauth = GoogleSignIn()
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
     return oauth.authorize()
 
-# Login with Google - callback
-@app.route('/oauth2callback')
-def oauth_callback():
+# Callback
+@app.route('/callback/<provider>')
+def oauth_callback(provider):
     if not current_user.is_anonymous():
-        return redirect(url_for('me'))
-    print 'DEBUG_1'
-    social_id, username, email = GoogleSignIn().callback()
-    print 'DEBUG_2'
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, username, email = oauth.callback()
     if social_id is None:
         flash('Authentication failed.')
         return redirect(url_for('index'))
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(social_id=social_id).first()
     if not user:
-        user = User(name=username, email=email)
+        user = User(social_id=social_id, name=username, email=email)
         db.session.add(user)
         db.session.commit()
-    login_user(user, remember=True)
-    return redirect(url_for('me'))
+    login_user(user, True)
+    return redirect(url_for('index'))
 
+
+#@login_required
+
+
+'''
 # Logged in homepage
 @app.route('/me')
 def me():
@@ -56,7 +66,7 @@ def me():
 
 
 
-'''
+
 @app.route('/login')
 def signin():
     section='Login'

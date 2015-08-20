@@ -27,3 +27,8 @@ sudo pip install oauth
 sudo pip install oauth2
 sudo pip install requests
 sudo pip install yolk
+sudo pip install Jinja2
+sudo pip install MarkupSafe
+sudo pip install Werkzeug
+sudo pip install argparse
+sudo pip install itsdangerous
