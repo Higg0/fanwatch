@@ -9,7 +9,7 @@
     <h1>FanWatch</h1>
     {% if current_user.is_authenticated() %}
       <h5>Signed in as {{ current_user.email }}</h5>
-      <h2>Hi, {{ current_user.name }}!</h2>
+      <h3>Hey {{ current_user.firstname }}, welcome to FanWatch.</h3>
       <p>
         <h3> 
         Upcoming Events

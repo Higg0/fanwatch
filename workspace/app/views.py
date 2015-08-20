@@ -9,6 +9,7 @@ from content import get_sports, get_games
 
 from app import app, db, lm
 from .models import User, Events, Attendees
+from .forms import SelectGame
 
 @lm.user_loader
 def load_user(id):
@@ -42,12 +43,15 @@ def oauth_callback(provider):
         return redirect(url_for('index'))
     oauth = OAuthSignIn.get_provider(provider)
     social_id, username, email = oauth.callback()
+    firstname=username.split()
+    firstname=firstname[0]
+    print firstname
     if social_id is None:
         flash('Authentication failed.')
         return redirect(url_for('index'))
     user = User.query.filter_by(social_id=social_id).first()
     if not user:
-        user = User(social_id=social_id, name=username, email=email)
+        user = User(social_id=social_id, name=username, email=email, firstname=firstname)
         db.session.add(user)
         db.session.commit()
     login_user(user, True)
@@ -63,22 +67,25 @@ def create_pick_sport():
     listing=get_sports()
     return render_template('create_event_sports.html', section=section, back=back, listing=listing, prompt=prompt)
 
-@app.route('/new_event/sports/<sport>')
+@app.route('/new_event/sports/<sport>', methods=['GET','POST'])
 @login_required
 def create_pick_game(sport):
+    form=SelectGame()
     section='Pick a match'
     back=url_for('create_pick_sport')
     prompt='Pick a match'
     listing=get_games()
-    return render_template('create_event_games.html', section=section, back=back, listing=listing, prompt=prompt)
+    if form.validate_on_submit():
+        return redirect('/new_event/venue')
+    return render_template('create_event_games.html', section=section, back=back, listing=listing, prompt=prompt, form=form)
 
-@app.route('/new_event/create')
+@app.route('/new_event/venue')
 @login_required
 def create_event():
     section='Create Event'
     back=url_for('create_pick_sport')
     prompt='Pick a place'
-    return render_template('create_event_games.html', section=section, back=back, prompt=prompt)
+    return render_template('sample.html', section=section, back=back, prompt=prompt)
 
 
 

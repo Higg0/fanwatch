@@ -7,6 +7,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     social_id=db.Column(db.String(64), nullable=False, unique=True)
     name = db.Column(db.String(64), index=True, unique=False)
+    firstname = db.Column(db.String(64), index=True, unique=False)
     email = db.Column(db.String(120), index=True, unique=True)
     created_events = db.relationship('Events', backref='creator', lazy='dynamic') #user.created_events should allow us to find events they have created
 

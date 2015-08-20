@@ -14,23 +14,23 @@ def get_sports():
 def get_games():
     games=dict()
     games={
-        '20150828':[
-            ['New England', 'Carolina', '7:30 PM'],
+        'August 28, 2015':[
+            ['NewEngland', 'Carolina', '7:30 PM'],
     	    ['Detroit', 'Jacksonville', '8:00 PM'],
-    	    ['Tennessee', 'Kansas City', '8:00 PM']],
-        '20150829':[
+    	    ['Tennessee', 'KansasCity', '8:00 PM']],
+        'August 29, 2015':[
         	['Pittsburgh', 'Buffalo', '4:00 PM'],
     	    ['Atlanta', 'Miami', '7:00 PM'],
-    	    ['Cleveland', 'Tampa Bay', '7:00 PM'],
+    	    ['Cleveland', 'TampaBay', '7:00 PM'],
     	    ['Minnesota', 'Dallas', '7:00 PM'],
-    	    ['NY Jets', 'NY Giants', '7:00 PM'],
+    	    ['NYJets', 'NY Giants', '7:00 PM'],
     	    ['Chicago', 'Cincinnati', '7:30 PM'],
     	    ['Washington', 'Baltimore', '7:30 PM'],
-    	    ['Seattle', 'San Diego', '8:00 PM'],
-    	    ['Philadelphia', 'Green Bay', '8:00 PM'],
-    	    ['Indianapolis', 'St. Louis', '8:00 PM'],
-    	    ['San Francisco', 'Denver', '9:00 PM']],
-    	'20150830':[
-    	    ['Houston', 'New Orleans', '4:00 PM'],
+    	    ['Seattle', 'SanDiego', '8:00 PM'],
+    	    ['Philadelphia', 'GreenBay', '8:00 PM'],
+    	    ['Indianapolis', 'StLouis', '8:00 PM'],
+    	    ['SanFrancisco', 'Denver', '9:00 PM']],
+    	'August 30, 2015':[
+    	    ['Houston', 'NewOrleans', '4:00 PM'],
     	    ['Arizona', 'Oakland', '8:00 PM']]}
     return games

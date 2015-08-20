@@ -5,15 +5,18 @@
     <h4>
       {{ prompt }}
     </h4>
+    <form action="" method="post" name="SelectGame">
+      {{ form.hidden_tag() }}
+      <p>{{ form.chosen_game }}</p>
+      <p><input type="submit" value="Create Event"></p>
+    </form>
+{% endblock %}
+
+
+
+
+<!--
     <h4>
-      
-      <!--
-      NEED TO USE SUBMIT FORMS STUFF HERE
-      http://wtforms.readthedocs.org/en/latest/widgets.html
-      http://wtforms.readthedocs.org/en/latest/
-      http://flask.pocoo.org/docs/0.10/patterns/wtforms/
-      -->
-      
       {% for date in listing %}
         <h4>
           {{ date }}
@@ -23,7 +26,5 @@
             {{ game[0] }} @ {{ game[1] }} | {{ game[2] }}
           </h5>
         {% endfor %} 
-      {% endfor %} 
-      <a href="{{ url_for('create_event') }}">Submit</a>
-    </h4>
-{% endblock %}
+      {% endfor %}
+-->
