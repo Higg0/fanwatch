@@ -1,8 +1,6 @@
 # Contains database structure (models)
 
-from flask.ext.login import LoginManager, UserMixin
 from app import db
-
 
 
 class User(db.Model):
