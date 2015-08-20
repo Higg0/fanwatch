@@ -10,7 +10,6 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     created_events = db.relationship('Events', backref='creator', lazy='dynamic') #user.created_events should allow us to find events they have created
 
-    
     def is_authenticated(self):
         return True
 

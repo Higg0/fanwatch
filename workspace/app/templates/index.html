@@ -18,8 +18,8 @@
           There will eventually be a list of attending events here...
         </h4>
       </p>
-      <p><a href='/sports'>Find an Event</a></p>
-      <p><a href='/new_event'>Create an Event</a></p>
+      <p><a href="{{ url_for('events') }}">Find an Event</a></p>
+      <p><a href="{{ url_for('create_pick_sport') }}">Create an Event</a></p>
       <p><a href="{{ url_for('logout') }}">Logout</a></p>
     {% else %}
       <h3> 

@@ -1,0 +1,29 @@
+<!--This template is a sample layout for initial build-out and testing-->
+
+{% extends "base.html" %}
+{% block content %}
+    <h4>
+      {{ prompt }}
+    </h4>
+    <h4>
+      
+      <!--
+      NEED TO USE SUBMIT FORMS STUFF HERE
+      http://wtforms.readthedocs.org/en/latest/widgets.html
+      http://wtforms.readthedocs.org/en/latest/
+      http://flask.pocoo.org/docs/0.10/patterns/wtforms/
+      -->
+      
+      {% for date in listing %}
+        <h4>
+          {{ date }}
+        </h4>
+        {% for game in listing[date] %}
+          <h5>
+            {{ game[0] }} @ {{ game[1] }} | {{ game[2] }}
+          </h5>
+        {% endfor %} 
+      {% endfor %} 
+      <a href="{{ url_for('create_event') }}">Submit</a>
+    </h4>
+{% endblock %}
