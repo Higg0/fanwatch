@@ -11,6 +11,34 @@
       <p><input type="submit" value="Create Event"></p>
     </form>
 
+
+    
+    <head>
+    <style type="text/css">
+      html, body { height: 100%; margin: 15; padding: 0; }
+      #map { height: 45%; width: 45%;}
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script type="text/javascript">
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 38.030385, lng: -78.485228},
+    zoom: 13
+  });
+}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZD4Y3ccblpvEyCPqnHh-WV75-zY6NFDk&callback=initMap">
+    </script>
+  </body>
+
+
 {% endblock %}
 
 
