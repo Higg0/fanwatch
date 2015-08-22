@@ -6,10 +6,10 @@
     <title>FanWatch | Meet Up With Fellow Fans For Every Game</title>
   </head>
   <body>
-    <h1>FanWatch</h1>
+    <h2>FanWatch</h2>
     {% if current_user.is_authenticated() %}
-      <h5>Signed in as {{ current_user.email }}</h5>
-      <h3>Hey {{ current_user.firstname }}, welcome to FanWatch.</h3>
+      <h6>Signed in as {{ current_user.email }}</h6>
+      <h3>hey {{ current_user.firstname }}. welcome to FanWatch.</h3>
       <p>
         <h3> 
         Upcoming Events
